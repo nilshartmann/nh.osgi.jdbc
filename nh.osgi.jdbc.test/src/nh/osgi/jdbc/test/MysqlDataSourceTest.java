@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2011 Bundlemaker project team.
+ * Copyright (c) 2011 Nils Hartmann
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- *     Bundlemaker project team - initial API and implementation
+ *    Nils Hartmann - initial API and implementation
  ******************************************************************************/
 package nh.osgi.jdbc.test;
 
@@ -22,12 +22,12 @@ import org.osgi.service.jdbc.DataSourceFactory;
  * @author Nils Hartmann (nils@nilshartmann.net)
  * 
  */
-public class H2DataSourceTest extends AbstractDataSourceTest {
+public class MysqlDataSourceTest extends AbstractDataSourceTest {
 
   public void test_createDataSource() throws Exception {
 
-    // obtain the H2 DataSource Factory from Service Registry
-    DataSourceFactory dataSourceFactory = getDataSourceFactory("org.h2.jdbcx.JdbcDataSource");
+    // obtain the DataSource Factory from Service Registry
+    DataSourceFactory dataSourceFactory = getDataSourceFactory("com.mysql.jdbc.MysqlDataSource");
 
     // obtain a data source
     DataSource dataSource = dataSourceFactory.createDataSource(getDataSourceProperties());
@@ -36,16 +36,20 @@ public class H2DataSourceTest extends AbstractDataSourceTest {
     // execute a query to make sure retrieved datasource works
     Connection connection = dataSource.getConnection();
     Statement stmt = connection.createStatement();
-    stmt.execute("CREATE TABLE osgi_test(primary_key VARCHAR(256))");
+    stmt.execute("select version()");
   }
 
   protected Properties getDataSourceProperties() {
 
-    // Properties for an in-memory Database
+    // SQL to create database:
+    // create database jdbc_osgi;
+    // GRANT ALL PRIVILEGES ON jdbc_osgi.* TO 'monty'@'%' IDENTIFIED BY 'jdbcpasswd' WITH GRANT OPTION;
+
     Properties props = new Properties();
-    props.put(DataSourceFactory.JDBC_URL, "jdbc:h2:mem:db1");
-    props.put(DataSourceFactory.JDBC_USER, "sa");
-    props.put(DataSourceFactory.JDBC_PASSWORD, "");
+    // (assume mysql runs on host 'mysql.nils')
+    props.put(DataSourceFactory.JDBC_URL, "jdbc:mysql://mysql.nils/jdbc_osgi");
+    props.put(DataSourceFactory.JDBC_USER, "monty");
+    props.put(DataSourceFactory.JDBC_PASSWORD, "jdbcpasswd");
 
     return props;
   }

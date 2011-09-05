@@ -10,5 +10,6 @@
 	biz.aQute.bnd.annotation,\
 	junit.osgi,\
 	osgi.enterprise,\
-	org.h2
+	org.h2,\
+	com.mysql.jdbc
 -sub: *.bnd

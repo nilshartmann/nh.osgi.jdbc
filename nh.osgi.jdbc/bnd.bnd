@@ -13,3 +13,6 @@
 	org.h2,\
 	com.mysql.jdbc
 -sub: *.bnd
+Bundle-Version: 1.0.0.${tstamp}
+Bundle-Vendor: Nils Hartmann
+

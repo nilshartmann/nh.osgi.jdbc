@@ -51,7 +51,8 @@ public class H2DataSourceFactory implements DataSourceFactory {
 
   @Override
   public Driver createDriver(Properties props) throws SQLException {
-    throw new SQLException("Method not supported: createDriver");
+    org.h2.Driver h2Driver = new org.h2.Driver();
+    return h2Driver;
   }
 
   protected JdbcDataSource createH2DataSource(Properties props) throws SQLException {

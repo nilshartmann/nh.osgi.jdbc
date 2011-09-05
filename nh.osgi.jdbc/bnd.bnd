@@ -1,0 +1,14 @@
+-runbundles: osgi.cmpn,\
+	org.apache.felix.scr,\
+	org.apache.felix.shell,\
+	org.apache.felix.shell.tui,\
+	org.h2,\
+	osgi.enterprise
+-runfw: org.apache.felix.framework
+-buildpath: osgi.core,\
+	osgi.cmpn,\
+	biz.aQute.bnd.annotation,\
+	junit.osgi,\
+	osgi.enterprise,\
+	org.h2
+-sub: *.bnd

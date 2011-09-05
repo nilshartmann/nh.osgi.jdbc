@@ -1,0 +1,2 @@
+Private-Package: nh.osgi.jdbc.h2
+Service-Component: *
